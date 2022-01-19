@@ -35,8 +35,8 @@ ID id(
     .PCSel (in_PCSel),
     .ALUSrc1 (ALUSrc1),
     .ALUSrc2 (ALUSrc2),
-    .RegWE (RegWe),
-    .MemWE (MemWe),
+    .RegWE (RegWE),
+    .MemWE (MemWE),
     .WBSel (WBSel),
     .Imm (Imm),
     .ALUop (ALUOp)
