@@ -28,7 +28,8 @@ always @ (posedge clk) begin
 	else if (PCSel)
 		PC <= Addr;
 	else
-		PC <= PC + 4'h4;  // New PC equals ((old PC) + 4) per cycle.
+		//PC <= PC + 4'h4;  // New PC equals ((old PC) + 4) per cycle.
+	PC <= PC + 4;
 end
 
 endmodule

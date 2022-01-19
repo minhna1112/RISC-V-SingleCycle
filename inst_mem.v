@@ -14,7 +14,7 @@ always @ (*) begin
 	if (!rst)
 		inst <= 32'b0;
 	else
-		inst <= inst_memory[addr];
+		inst <= inst_memory[addr[31:2]];
 end
 
 endmodule
