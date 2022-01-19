@@ -1,4 +1,4 @@
-module test ();
+module test_IM ();
 // Clock and reset signals
 reg clk;
 reg reset;
@@ -40,3 +40,6 @@ initial begin
 end
 
 endmodule
+
+
+module test_PC
