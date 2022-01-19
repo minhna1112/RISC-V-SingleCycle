@@ -2,9 +2,14 @@ module ID (
     input wire rst,
     input wire[31:0] inst,
     output wire PCSel, ALUSrc1, AlUSrc2, RegWE, MemWE,
-    output wire[1:0] ALUOp, WBSel,
-    output wire[31:0] Imm
+    output wire[1:0] WBSel,
+    output wire[31:0] Imm,
+    output wire[4:0]  ALUOp
 )
+
+wire[31:0] imm_I = {{21{inst_i[31:31]}}, inst_i[30:20]};
+wire[31:0] imm_B = {{20{inst_i[31:31]}}, inst_i[ 7: 7], inst_i[30:25], inst_i[11:8], 1'b0};
+wire[31:0] imm_S = {{21{inst_i[31:31]}}, inst_i[30:25], inst_i[11:7]};
 
 always @ (*) begin
     if (!rst)
@@ -65,5 +70,37 @@ end
 
 always @ (*) begin
     if (!rst)
-       ALUOp <=  
+        ALUop <= 5'b0;
+    else begin
+        casex (inst_i)
+            32'bxxxxxxxxxxxxxxxxxxxxxxxxx1101111: ALUop <= 5'b10000;  // jal
+            32'bxxxxxxxxxxxxxxxxx000xxxxx1100011: ALUop <= 5'b10001;  // beq
+            32'bxxxxxxxxxxxxxxxxx010xxxxx0000011: ALUop <= 5'b10100;  // lw
+            32'bxxxxxxxxxxxxxxxxx010xxxxx0100011: ALUop <= 5'b10101;  // sw
+            32'bxxxxxxxxxxxxxxxxx000xxxxx0010011: ALUop <= 5'b01100;  // addi
+            32'b0000000xxxxxxxxxx000xxxxx0110011: ALUop <= 5'b01101;  // add
+            32'b0100000xxxxxxxxxx000xxxxx0110011: ALUop <= 5'b01110;  // sub
+            32'b0000000xxxxxxxxxx100xxxxx0110011: ALUop <= 5'b00110;  // xor
+            32'b0000000xxxxxxxxxx101xxxxx0110011: ALUop <= 5'b01001;  // srl
+            32'b0000000xxxxxxxxxx110xxxxx0110011: ALUop <= 5'b00101;  // or
+            32'b0000000xxxxxxxxxx111xxxxx0110011: ALUop <= 5'b00100;  // and
+            32'bxxxxxxxxxxxxxxxxx000xxxxx1100111: ALUop <= 5'b10100;  // jalr
+            default: ALUop <= 5'b0;
+        endcase
+    end
+end
+
+always @ (*) begin
+    if (!rst)
+        Imm <= 32'b0;
+    else begin
+        casex (inst_i)
+            32'bxxxxxxxxxxxxxxxxx000xxxxx1100011: Imm <= imm_B;  // beq
+            32'bxxxxxxxxxxxxxxxxx010xxxxx0000011: Imm <= imm_I;  // lw
+            32'bxxxxxxxxxxxxxxxxx010xxxxx0100011: Imm <= imm_S;  // sw
+            32'bxxxxxxxxxxxxxxxxx000xxxxx0010011: Imm <= imm_I;  // addi
+            32'bxxxxxxxxxxxxxxxxx000xxxxx1100111: Imm <= imm_I;  // jalr
+            default: Imm <= 32'b0;
+        endcase
+    end
 end
