@@ -1,11 +1,11 @@
 module ID (
     input wire rst,
-    input wire[31:0] inst,
-    output wire PCSel, ALUSrc1, AlUSrc2, RegWE, MemWE,
-    output wire[1:0] WBSel,
-    output wire[31:0] Imm,
-    output wire[4:0]  ALUOp
-)
+    input wire[31:0] inst_i,
+    output reg PCSel, ALUSrc1, ALUSrc2, RegWE, MemWE,
+    output reg[1:0] WBSel,
+    output reg[31:0] Imm,
+    output reg[4:0]  ALUop
+);
 
 wire[31:0] imm_I = {{21{inst_i[31:31]}}, inst_i[30:20]};
 wire[31:0] imm_B = {{20{inst_i[31:31]}}, inst_i[ 7: 7], inst_i[30:25], inst_i[11:8], 1'b0};
@@ -43,9 +43,9 @@ always @ (*) begin
     if (!rst)
        RegWE <= 1'b0;
     else if (inst_i[6:0] == 7'b0100011 || inst_i[6:0] == 7'b1100011) // S-type and B-type
-       RegWE <== 1'b0;
+       RegWE <= 1'b0;
     else
-       RegWE <== 1'b1;
+       RegWE <= 1'b1;
 end
 
 always @ (*) begin
@@ -73,7 +73,7 @@ always @ (*) begin
         ALUop <= 5'b0;
     else begin
         casex (inst_i)
-            32'bxxxxxxxxxxxxxxxxxxxxxxxxx1101111: ALUop <= 5'b10000;  // jal
+
             32'bxxxxxxxxxxxxxxxxx000xxxxx1100011: ALUop <= 5'b10001;  // beq
             32'bxxxxxxxxxxxxxxxxx010xxxxx0000011: ALUop <= 5'b10100;  // lw
             32'bxxxxxxxxxxxxxxxxx010xxxxx0100011: ALUop <= 5'b10101;  // sw
@@ -104,3 +104,5 @@ always @ (*) begin
         endcase
     end
 end
+
+endmodule
