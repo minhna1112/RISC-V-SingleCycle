@@ -8,10 +8,11 @@ reg[31:0] in_addr;
 wire[31:0] out_PC;
 wire[31:0] out_inst;
 
-wire   in_PCSel, ALUSrc1, AlUSrc2, RegWE, MemWE;
+wire   in_PCSel, ALUSrc1, ALUSrc2, RegWE, MemWE;
 wire[1:0] WBSel;
 wire[31:0] Imm;
 wire[4:0]  ALUOp;
+wire[5:0] rs1, rs2, rd;
 
 
 
@@ -39,7 +40,10 @@ ID id(
     .MemWE (MemWE),
     .WBSel (WBSel),
     .Imm (Imm),
-    .ALUop (ALUOp)
+    .ALUop (ALUOp),
+    .rs1 (rs1),
+    .rs2 (rs2),
+    .rd (rd)
 );
  // Generate the clock
  initial begin
@@ -57,6 +61,7 @@ ID id(
  initial begin
      // Use the monitor task to display FPGA IO
     $monitor( "time=%3d, in_addr=%32b, in_PCSel=%1b, PC=%32b, Inst=%32b\n", $time, in_addr, in_PCSel, out_PC, out_inst);
+    $monitor( "***time=%3d, immediate=%32d, rd=%32d, rs1=%32d, rs2=%32d\n", $time, Imm, rd, rs1, rs2);
 // Generate each input with a 20ns delay between them
     
     in_addr = 32'h00000000;

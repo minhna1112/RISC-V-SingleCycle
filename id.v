@@ -4,7 +4,8 @@ module ID (
     output reg PCSel, ALUSrc1, ALUSrc2, RegWE, MemWE,
     output reg[1:0] WBSel,
     output reg[31:0] Imm,
-    output reg[4:0]  ALUop
+    output reg[4:0]  ALUop,
+    output reg[5:0] rs1, rs2, rd
 );
 
 wire[31:0] imm_I = {{21{inst_i[31:31]}}, inst_i[30:20]};
@@ -103,6 +104,27 @@ always @ (*) begin
             default: Imm <= 32'b0;
         endcase
     end
+end
+
+always @ (*) begin
+    if (!rst)
+        rd <= 1'b0;
+    else
+        rd <= inst_i[11:7];
+end
+
+always @ (*) begin
+    if (!rst)
+        rs1 <= 1'b0;
+    else
+        rs1 <= inst_i[19:15];
+end
+
+always @ (*) begin
+    if (!rst)
+        rs2 <= 1'b0;
+    else
+        rs2 <= inst_i[24:20];
 end
 
 endmodule
