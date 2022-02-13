@@ -6,8 +6,6 @@
     input   wire        we,
     input   wire[4:0]   WriteAddr,
     input   wire[31:0]  WriteData,
-    input   wire        ReadReg1,
-    input   wire        ReadReg2,
     input   wire[4:0]   ReadAddr1,
     input   wire[4:0]   ReadAddr2,
     output  reg [31:0]  ReadData1,
@@ -68,10 +66,9 @@ end
 always @ (*) begin
     if (!rst || ReadAddr1 == 5'h0)
         ReadData1 <= 32'b0;
-    else if (ReadReg1) begin
+    else 
         ReadData1 <= regFile[ReadAddr1];
-    end else
-        ReadData1 <= 32'b0;
+
 end
 
 /*
@@ -80,10 +77,8 @@ end
 always @ (*) begin
     if (!rst || ReadAddr2 == 5'h0)
         ReadData2 <= 32'b0;
-    else if (ReadReg2) begin
+    else 
         ReadData2 <= regFile[ReadAddr2];
-    end else
-        ReadData2 <= 32'b0;
 end
     
 endmodule
