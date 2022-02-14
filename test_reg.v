@@ -13,7 +13,7 @@ wire[1:0] WBSel;
 wire[31:0] Imm;
 wire[4:0]  ALUOp;
 wire[4:0] rs1, rs2, rd;
-wire BrEq
+wire BrEq;
 
 reg[31:0] in_WriteData;
 wire [31:0] in_ReadData1;
