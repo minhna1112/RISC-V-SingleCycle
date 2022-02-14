@@ -6,7 +6,7 @@ module ID (
     output reg[1:0] WBSel,
     output reg[31:0] Imm,
     output reg[4:0]  ALUop,
-    output reg[5:0] rs1, rs2, rd
+    output reg[4:0] rs1, rs2, rd
 );
 
 wire[31:0] imm_I = {{21{inst_i[31:31]}}, inst_i[30:20]};

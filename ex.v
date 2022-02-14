@@ -31,7 +31,7 @@ end
 always @ (*) begin
     if (rst)
         Oprend2 <= 32'b0;
-    else if (ALUSrc1)
+    else if (ALUSrc2)
         Oprend2 <= Imm;
     else
         Oprend2 <= DataOutReg2;

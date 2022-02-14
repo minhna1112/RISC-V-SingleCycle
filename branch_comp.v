@@ -7,7 +7,7 @@ module BranchComp(
 );
 
 always @(*) begin
-    if (!rst) 
+    if (rst) 
         BrEq <= 1'b0;
     else if (DataOutReg1 == DataOutReg2)
         BrEq <= 1'b1;
