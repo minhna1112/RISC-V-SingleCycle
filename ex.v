@@ -20,7 +20,7 @@ module EX(
   reg[31:0] Oprend2;  
 
 always @ (*) begin
-    if (!rst)
+    if (rst)
         Oprend1 <= 32'b0;
     else if (ALUSrc1)
         Oprend1 <= PC;
@@ -29,7 +29,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (!rst)
+    if (rst)
         Oprend2 <= 32'b0;
     else if (ALUSrc1)
         Oprend2 <= Imm;
@@ -41,7 +41,7 @@ end
  * This always part controls the WriteData_o.
  */    
 always @ (*) begin
-  if (!rst)
+  if (rst)
     ALUOut <= 32'b0;
   else begin
     case (ALUop_i)

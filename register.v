@@ -21,7 +21,7 @@
  */    
 always @ (posedge clk) begin
     regFile[5'h0] <= 32'b0;  // Register x0 always equals 0. 
-    if (!rst)
+    if (rst)
         regFile[5'b00001] <= 32'b0;
         regFile[5'b00010] <= 32'b0;
         regFile[5'b00011] <= 32'b0;
@@ -54,7 +54,7 @@ always @ (posedge clk) begin
         regFile[5'b11110] <= 32'b0;
         regFile[5'b11111] <= 32'b0;
         
-    if (rst && we && WriteAddr != 5'h0) begin
+    if (!rst && we && WriteAddr != 5'h0) begin
         regFile[WriteAddr] <= WriteData;  // Write data to register.
         $display("x%d = %d", WriteAddr, WriteData);  // Display the change of register.
     end
@@ -64,7 +64,7 @@ end
  * This always part controls the signal ReadData1 as rs1. 
  */ 
 always @ (*) begin
-    if (!rst || ReadAddr1 == 5'h0)
+    if (rst || ReadAddr1 == 5'h0)
         ReadData1 <= 32'b0;
     else 
         ReadData1 <= regFile[ReadAddr1];
@@ -75,7 +75,7 @@ end
  * This always part controls the signal ReadData2 as rs2.
  */ 
 always @ (*) begin
-    if (!rst || ReadAddr2 == 5'h0)
+    if (rst || ReadAddr2 == 5'h0)
         ReadData2 <= 32'b0;
     else 
         ReadData2 <= regFile[ReadAddr2];

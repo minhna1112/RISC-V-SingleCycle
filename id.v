@@ -14,7 +14,7 @@ wire[31:0] imm_B = {{20{inst_i[31:31]}}, inst_i[ 7: 7], inst_i[30:25], inst_i[11
 wire[31:0] imm_S = {{21{inst_i[31:31]}}, inst_i[30:25], inst_i[11:7]};
 
 always @ (*) begin
-    if (!rst)
+    if (rst)
         PCSel <= 1'b0;
     else if (inst_i[6:0] == 7'b1100111) // jarl
         PCSel <= 1'b1;
@@ -26,7 +26,7 @@ end
 
 
 always @ (*) begin
-    if (!rst)
+    if (rst)
         ALUSrc1 <= 1'b0;
     else if (inst_i[6:0] == 7'b1100011)  //  beq
         ALUSrc1 <= 1'b1;
@@ -35,7 +35,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (!rst)
+    if (rst)
         ALUSrc2 <= 1'b0;
     else if (inst_i[6:0] == 7'b0110011)  // R-type
         ALUSrc2 <= 1'b0;
@@ -44,7 +44,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (!rst)
+    if (rst)
        RegWE <= 1'b0;
     else if (inst_i[6:0] == 7'b0100011 || inst_i[6:0] == 7'b1100011) // S-type and B-type
        RegWE <= 1'b0;
@@ -53,7 +53,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (!rst)
+    if (rst)
        MemWE <= 1'b0;
     else if (inst_i[6:0] == 7'b0100011) // Store Instruction
        MemWE <= 1'b1;
@@ -62,7 +62,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (!rst)
+    if (rst)
        WBSel <= 2'b0;
     else if (inst_i[6:0] == 7'b0000011)
        WBSel <= 2'b01;
@@ -73,7 +73,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (!rst)
+    if (rst)
         ALUop <= 5'b0;
     else begin
         casex (inst_i)
@@ -95,7 +95,7 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (!rst)
+    if (rst)
         Imm <= 32'b0;
     else begin
         casex (inst_i)
@@ -110,21 +110,21 @@ always @ (*) begin
 end
 
 always @ (*) begin
-    if (!rst)
+    if (rst)
         rd <= 1'b0;
     else
         rd <= inst_i[11:7];
 end
 
 always @ (*) begin
-    if (!rst)
+    if (rst)
         rs1 <= 1'b0;
     else
         rs1 <= inst_i[19:15];
 end
 
 always @ (*) begin
-    if (!rst)
+    if (rst)
         rs2 <= 1'b0;
     else
         rs2 <= inst_i[24:20];
