@@ -4,7 +4,7 @@ module BranchComp(
     input   wire[31:0]  DataOutReg2,
 
     output reg BrEq
-)
+);
 
 always @(*) begin
     if (!rst) 

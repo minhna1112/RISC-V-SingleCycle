@@ -85,7 +85,7 @@ BranchComp brc(
  // Test stimulus
  initial begin
      // Use the monitor task to display FPGA IO
-    $monitor( "time=%3d, in_addr=%32b, in_PCSel=%1b, PC=%32b, Inst=%32b\n", $time, in_addr, in_PCSel, out_PC, out_inst);
+    $monitor( "time=%3d, in_addr=%32b, breq = %1b, in_PCSel=%1b, PC=%32b, Inst=%32b\n", $time, in_addr, BrEq,in_PCSel, out_PC, out_inst);
     //$monitor( "***time=%3d, pc_out=%32d,immediate=%32d, rd=%5d, rs1=%5d, rs2=%5d, WriteData=%32d, ReadData1=%32d, ReadData2=%32d\n", $time, out_PC,Imm, rd, rs1, rs2, in_WriteData, in_ReadData1, in_ReadData2);
 // Generate each input with a 20ns delay between them
     

@@ -8,11 +8,10 @@ module EX(
   input   wire ALUSrc1,
   input   wire ALUSrc2,
   input wire[31:0] Imm,
-	
-	
 	input   wire[31:0]  PC,
-	output	wire[4:0]	ALUop_o,
-	output  wire[31:0] ALUOut
+  
+	output	reg[4:0]	ALUop_o,
+	output  reg[31:0] ALUOut
 
 );
     
@@ -42,8 +41,8 @@ end
  * This always part controls the WriteData_o.
  */    
 always @ (*) begin
-  if (rst)
-    WriteData_o <= 32'b0;
+  if (!rst)
+    ALUOut <= 32'b0;
   else begin
     case (ALUop_i)
       
