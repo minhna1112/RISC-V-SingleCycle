@@ -3,41 +3,51 @@ module EX(
 
 	input	wire	    rst,
 	input	wire[4:0]   ALUop_i,
-    input   wire[31:0]  Oprend1,
-    input   wire[31:0]  Oprend2,
-    input   wire[4:0]   WriteDataNum_i,
-	input 	wire		WriteReg_i,
-	input	wire[31:0]  LinkAddr,
-	input   wire[31:0]  inst_i,
-	output	reg 		WriteReg_o,
+    input   wire[31:0]  DataOutReg1,
+    input   wire[31:0]  DataOutReg2,
+    input   wire ALUSrc1,
+    input   wire ALUSrc2,
+    input wire[31:0] Imm,
+	
+	
+	input   wire[31:0]  PC,
 	output	wire[4:0]	ALUop_o,
-	output	reg [4:0]	WriteDataNum_o,
-	output	reg [31:0]	WriteData_o,
-    output  wire[31:0]  MemAddr_o,
-    output  wire[31:0]  Result
+	output  wire[31:0] ALUOut,
+
+  
+  
 
 );
     
   assign ALUop_o   = ALUop_i;
-  
-/*
- * This always part controls the WriteDatamNum_o.
- */    
+  wire[31:0] Oprend1;
+  wire[31:0] Oprend2;  
+
 always @ (*) begin
-	if (rst)
-		WriteDataNum_o <= 5'b0;
-	else
-    	WriteDataNum_o <= WriteDataNum_i;
+    if (!rst)
+        Oprend1 <= 32'b0;
+    else if (ALUSrc1)
+        Oprend1 <= PC;
+    else
+        Oprend1 <= DataOutReg1;
 end
 
-/*
- * This always part controls the WriteReg_i.
- */    
 always @ (*) begin
-  if (rst)
-    WriteReg_o <= 1'b0;
-  else
-    WriteReg_o <= WriteReg_i;
+    if (!rst)
+        Oprend2 <= 32'b0;
+    else if (ALUSrc1)
+        Oprend2 <= Imm;
+    else
+        Oprend2 <= DataOutReg2;
+end
+
+always @ (*) begin
+    if (!rst)
+        Oprend1 <= 32'b0;
+    else if (ALUSrc1)
+        Oprend1 <= PC;
+    else
+        Oprend1 <= DataOutReg1;
 end
 
 /*
@@ -48,20 +58,21 @@ always @ (*) begin
     WriteData_o <= 32'b0;
   else begin
     case (ALUop_i)
-      5'b10000: WriteData_o <= LinkAddr; 					      // jal
-      5'b10001: WriteData_o <= LinkAddr; 				        // beq
-      5'b10010: WriteData_o <= LinkAddr; 					      // blt
-      5'b10100: WriteData_o <= 32'b0;                   // lw
-      5'b10101: WriteData_o <= 32'b0;                   // sw
-      5'b01100: WriteData_o <= Oprend1 +  Oprend2;  		// addi
-      5'b01101: WriteData_o <= Oprend1 +  Oprend2;  		// add
-      5'b01110: WriteData_o <= Oprend1 -  Oprend2;  		// sub
-      5'b01000: WriteData_o <= Oprend1 << Oprend2[4:0];	// sll
-      5'b00110: WriteData_o <= Oprend1 ^  Oprend2; 		  // xor
-      5'b01001: WriteData_o <= Oprend1 >> Oprend2[4:0]; // srl
-      5'b00101: WriteData_o <= Oprend1 |  Oprend2;  		// or
-      5'b00100: WriteData_o <= Oprend1 &  Oprend2;  		// and
-      default:  WriteData_o <= 32'b0;
+      
+      5'b10001: ALUOut <= Oprend1 +  Oprend2; 				// beq
+      
+      5'b10100: ALUOut <= Oprend1 +  Oprend2;      // lw and jalr
+      5'b10101: ALUOut <= Oprend1 +  Oprend2;      // sw
+      5'b01100: ALUOut <= Oprend1 +  Oprend2;  		// addi
+      5'b01101: ALUOut <= Oprend1 +  Oprend2;  		// add
+      5'b01110: ALUOut <= Oprend1 -  Oprend2;  		// sub
+      5'b01000: ALUOut <= Oprend1 << Oprend2[4:0];	// sll
+      5'b00110: ALUOut <= Oprend1 ^  Oprend2; 		  // xor
+      5'b01001: ALUOut <= Oprend1 >> Oprend2[4:0]; // srl
+      5'b00101: ALUOut <= Oprend1 |  Oprend2;  		// or
+      5'b00100: ALUOut <= Oprend1 &  Oprend2;  		// and
+      
+      default:  ALUOut <= 32'b0;
     endcase
   end
 end
