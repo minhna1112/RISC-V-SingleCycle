@@ -19,8 +19,8 @@ wire[31:0] in_WriteData;
 wire [31:0] in_ReadData1;
 wire [31:0] in_ReadData2;
 
-wire[4:0] ALUop_o
-wire[31:0] ALUOut
+wire[4:0] ALUop_o;
+wire[31:0] ALUOut;
 
 // Dut instantiation
  PC pc (

@@ -10,7 +10,7 @@ module EX(
   input wire[31:0] Imm,
 	input   wire[31:0]  PC,
 
-	output	reg[4:0]	ALUop_o,
+	output	wire[4:0]	ALUop_o,
 	output  reg[31:0] ALUOut
 
 );
