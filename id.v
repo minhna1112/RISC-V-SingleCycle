@@ -1,6 +1,7 @@
 module ID (
     input wire rst,
     input wire[31:0] inst_i,
+    input wire BrEq,
     output reg PCSel, ALUSrc1, ALUSrc2, RegWE, MemWE,
     output reg[1:0] WBSel,
     output reg[31:0] Imm,
@@ -15,7 +16,9 @@ wire[31:0] imm_S = {{21{inst_i[31:31]}}, inst_i[30:25], inst_i[11:7]};
 always @ (*) begin
     if (!rst)
         PCSel <= 1'b0;
-    else if (inst_i[6:0] == 7'b1100111 || inst_i[6:0] == 7'b1100011)  // jalr, beq
+    else if (inst_i[6:0] == 7'b1100111) // jarl
+        PCSel <= 1'b1;
+    else if (inst_i[6:0] == 7'b1100011 && BrEq)  // beq
         PCSel <= 1'b1;
     else
         PCSel <= 1'b0;

@@ -3,19 +3,16 @@ module EX(
 
 	input	wire	    rst,
 	input	wire[4:0]   ALUop_i,
-    input   wire[31:0]  DataOutReg1,
-    input   wire[31:0]  DataOutReg2,
-    input   wire ALUSrc1,
-    input   wire ALUSrc2,
-    input wire[31:0] Imm,
+  input   wire[31:0]  DataOutReg1,
+  input   wire[31:0]  DataOutReg2,
+  input   wire ALUSrc1,
+  input   wire ALUSrc2,
+  input wire[31:0] Imm,
 	
 	
 	input   wire[31:0]  PC,
 	output	wire[4:0]	ALUop_o,
 	output  wire[31:0] ALUOut,
-
-  
-  
 
 );
     
@@ -39,15 +36,6 @@ always @ (*) begin
         Oprend2 <= Imm;
     else
         Oprend2 <= DataOutReg2;
-end
-
-always @ (*) begin
-    if (!rst)
-        Oprend1 <= 32'b0;
-    else if (ALUSrc1)
-        Oprend1 <= PC;
-    else
-        Oprend1 <= DataOutReg1;
 end
 
 /*

@@ -13,6 +13,7 @@ wire[1:0] WBSel;
 wire[31:0] Imm;
 wire[4:0]  ALUOp;
 wire[5:0] rs1, rs2, rd;
+wire BrEq
 
 
 
@@ -43,8 +44,16 @@ ID id(
     .ALUop (ALUOp),
     .rs1 (rs1),
     .rs2 (rs2),
-    .rd (rd)
+    .rd (rd),
+    .BrEq (BrEq)
 );
+
+BranchComp brc(
+    .rst (reset),
+    .DataOutReg1(in_ReadData1),
+    .DataOutReg2(in_ReadData2),
+    .BrEq (BrEq)
+)
  // Generate the clock
  initial begin
      clk = 1'b0;
@@ -61,7 +70,7 @@ ID id(
  initial begin
      // Use the monitor task to display FPGA IO
     $monitor( "time=%3d, in_addr=%32b, in_PCSel=%1b, PC=%32b, Inst=%32b\n", $time, in_addr, in_PCSel, out_PC, out_inst);
-    $monitor( "***time=%3d, immediate=%32d, rd=%32d, rs1=%32d, rs2=%32d\n", $time, Imm, rd, rs1, rs2);
+    //$monitor( "***time=%3d, immediate=%32d, rd=%32d, rs1=%32d, rs2=%32d\n", $time, Imm, rd, rs1, rs2);
 // Generate each input with a 20ns delay between them
     
     in_addr = 32'h00000000;

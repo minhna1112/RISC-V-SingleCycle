@@ -13,7 +13,7 @@ wire[1:0] WBSel;
 wire[31:0] Imm;
 wire[4:0]  ALUOp;
 wire[4:0] rs1, rs2, rd;
-
+wire BrEq
 
 reg[31:0] in_WriteData;
 wire [31:0] in_ReadData1;
@@ -47,7 +47,8 @@ ID id(
     .ALUop (ALUOp),
     .rs1 (rs1),
     .rs2 (rs2),
-    .rd (rd)
+    .rd (rd),
+    .BrEq (BrEq)
 );
 
 Registers reg_mem (
@@ -60,6 +61,13 @@ Registers reg_mem (
     .ReadAddr2 (rs2),
     .ReadData1 (in_ReadData1),
     .ReadData2 (in_ReadData2)
+);
+
+BranchComp brc(
+    .rst (reset),
+    .DataOutReg1(in_ReadData1),
+    .DataOutReg2(in_ReadData2),
+    .BrEq (BrEq)
 );
 
  // Generate the clock
@@ -77,8 +85,8 @@ Registers reg_mem (
  // Test stimulus
  initial begin
      // Use the monitor task to display FPGA IO
-    //$monitor( "time=%3d, in_addr=%32b, in_PCSel=%1b, PC=%32b, Inst=%32b\n", $time, in_addr, in_PCSel, out_PC, out_inst);
-    $monitor( "***time=%3d, pc_out=%32d,immediate=%32d, rd=%5d, rs1=%5d, rs2=%5d, WriteData=%32d, ReadData1=%32d, ReadData2=%32d\n", $time, out_PC,Imm, rd, rs1, rs2, in_WriteData, in_ReadData1, in_ReadData2);
+    $monitor( "time=%3d, in_addr=%32b, in_PCSel=%1b, PC=%32b, Inst=%32b\n", $time, in_addr, in_PCSel, out_PC, out_inst);
+    //$monitor( "***time=%3d, pc_out=%32d,immediate=%32d, rd=%5d, rs1=%5d, rs2=%5d, WriteData=%32d, ReadData1=%32d, ReadData2=%32d\n", $time, out_PC,Imm, rd, rs1, rs2, in_WriteData, in_ReadData1, in_ReadData2);
 // Generate each input with a 20ns delay between them
     
     in_addr = 32'h00000000;
