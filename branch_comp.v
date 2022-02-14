@@ -6,7 +6,7 @@ module BranchComp(
     output reg BrEq
 )
 
-always (*) begin
+always @(*) begin
     if (!rst) 
         BrEq <= 1'b0;
     else if (DataOutReg1 == DataOutReg2)
