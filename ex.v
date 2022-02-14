@@ -9,15 +9,15 @@ module EX(
   input   wire ALUSrc2,
   input wire[31:0] Imm,
 	input   wire[31:0]  PC,
-  
+
 	output	reg[4:0]	ALUop_o,
 	output  reg[31:0] ALUOut
 
 );
     
   assign ALUop_o   = ALUop_i;
-  wire[31:0] Oprend1;
-  wire[31:0] Oprend2;  
+  reg[31:0] Oprend1;
+  reg[31:0] Oprend2;  
 
 always @ (*) begin
     if (!rst)
