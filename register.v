@@ -21,7 +21,7 @@
  */    
 always @ (posedge clk) begin
     regFile[5'h0] <= 32'b0;  // Register x0 always equals 0. 
-    if (rst)
+    if (!rst)
         regFile[5'b00001] <= 32'b0;
         regFile[5'b00010] <= 32'b0;
         regFile[5'b00011] <= 32'b0;
