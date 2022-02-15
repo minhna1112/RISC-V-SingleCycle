@@ -26,7 +26,7 @@ wire[31:0] ALUOut;
  PC pc (
      .clk (clk),
      .rst (reset),
-     .Addr (in_addr),
+     .Addr (ALUOut),
      .PCSel (in_PCSel),
      .PC (out_PC)
  );
