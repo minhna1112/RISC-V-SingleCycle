@@ -1,0 +1,8 @@
+// lw x1 x0 0
+// lw x2 x0 4
+// add x3 x1 x2
+// lw x4 x3 8
+// sw x4 x0 4
+// beq x2 x4 4
+// add x5 x2 x4
+// add x5 x0 x0 
