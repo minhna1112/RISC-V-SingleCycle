@@ -23,7 +23,7 @@ module PC(
  * This always part controls the signal PC.
  */
 always @ (posedge clk) begin
-	if (!rst)
+	if (rst)
 		PC <= 32'b0;
 	else if (PCSel)
 		PC <= Addr;

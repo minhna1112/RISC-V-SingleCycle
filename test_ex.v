@@ -12,7 +12,7 @@ wire   in_PCSel, ALUSrc1, ALUSrc2, RegWE, MemWE;
 wire[1:0] WBSel;
 wire[31:0] Imm;
 wire[4:0]  ALUOp;
-wire[5:0] rs1, rs2, rd;
+wire[4:0] rs1, rs2, rd;
 wire BrEq;
 
 reg[31:0] in_WriteData;
@@ -26,7 +26,7 @@ wire[31:0] ALUOut;
  PC pc (
      .clk (clk),
      .rst (reset),
-     .Addr (in_addr),
+     .Addr (ALUOut),
      .PCSel (in_PCSel),
      .PC (out_PC)
  );
@@ -93,9 +93,9 @@ EX ex(
 
  // Generate the reset
  initial begin
-     reset = 1'b0;
-     #15
      reset = 1'b1;
+     #15
+     reset = 1'b0;
  end
  // Test stimulus
  initial begin

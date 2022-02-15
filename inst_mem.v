@@ -11,7 +11,7 @@ module inst_mem(
 	initial $readmemb ("./RISC-V-SingleCycle/machinecode2.txt", inst_memory);	// read test assembly code file
 
 always @ (*) begin
-	if (!rst)
+	if (rst)
 		inst <= 32'b0;
 	else
 		inst <= inst_memory[addr[31:2]];
