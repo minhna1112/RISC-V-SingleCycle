@@ -8,7 +8,7 @@ module inst_mem(
 
 	reg[31:0]  inst_memory[0:100];
 
-	initial $readmemb ("./RISC-V-SingleCycle/machinecode2.txt", inst_memory);	// read test assembly code file
+	initial $readmemb ("./RISC-V-SingleCycle/machinecode3.txt", inst_memory);	// read test assembly code file
 
 always @ (*) begin
 	if (rst)
