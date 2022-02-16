@@ -104,7 +104,7 @@ WB wb(
     .PC(out_PC),
     .ALUOut(ALUOut),
     .Data_from_mem(MemDataOut),
-    .DataWriteToReg(DataWriteToReg)
+    .DataWriteToReg(DataWriteBack)
 );
  // Generate the clock
  initial begin
