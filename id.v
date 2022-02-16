@@ -64,12 +64,12 @@ end
 always @ (*) begin
     if (rst)
        WBSel <= 2'b0;
-    else if (inst_i[6:0] == 7'b0000011)
-       WBSel <= 2'b01;
-    else if (inst_i[6:0] == 7'b1100111)
+    else if (inst_i[6:0] == 7'b0000011) //lw
+       WBSel <= 2'b00;
+    else if (inst_i[6:0] == 7'b1100111) //jalr 
        WBSel <= 2'b10;
-    else
-       WBSel <= 2'b0;    
+    else //R-type, addi, output from alu
+       WBSel <= 2'b01;    
 end
 
 always @ (*) begin

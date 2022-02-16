@@ -23,6 +23,7 @@ wire[4:0] ALUop_o;
 wire[31:0] ALUOut;
 
 wire[31:0] MemDataOut, verify;
+wire[31:0] DataWriteBack;
 
 // Dut instantiation
  PC pc (
@@ -60,7 +61,7 @@ Registers reg_mem (
     .rst (reset),
     .we (RegWE),
     .WriteAddr (rd),
-    .WriteData (ALUOut), //not consider writeback yet
+    .WriteData (DataWriteBack), //not consider writeback yet
     .ReadAddr1 (rs1),
     .ReadAddr2 (rs2),
     .ReadData1 (in_ReadData1),
@@ -95,6 +96,15 @@ DataMem mem(
     .data_i(in_ReadData2),
     .data_o(MemDataOut),
     .verify(verify)
+);
+
+WB wb(
+    .rst(reset),
+    .WBSel(WBSel),
+    .PC(out_PC),
+    .ALUOut(ALUOut),
+    .Data_from_mem(MemDataOut),
+    .DataWriteToReg(DataWriteToReg)
 );
  // Generate the clock
  initial begin
