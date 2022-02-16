@@ -24,7 +24,7 @@ always @ (posedge clk) begin
 		data[addr + 2] <= data_i[23:16];
 		data[addr + 3] <= data_i[31:24];
         
-        $display("Word 0x%h = %d", address, {data[addr+3],data[addr+2],data[addr+1],data[addr]}); 
+        $display("Word 0x%h = %d", addr, {data[addr+3],data[addr+2],data[addr+1],data[addr]}); 
          // Display the change of a word.
 	end
 end

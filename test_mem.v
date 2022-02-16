@@ -1,4 +1,4 @@
-module test_EX ();
+module test_MEM ();
 // Clock and reset signals
 reg clk;
 reg reset;
@@ -22,7 +22,7 @@ wire [31:0] in_ReadData2;
 wire[4:0] ALUop_o;
 wire[31:0] ALUOut;
 
-wire[32:0] MemDataOut, verify;
+wire[31:0] MemDataOut, verify;
 
 // Dut instantiation
  PC pc (
@@ -92,7 +92,7 @@ DataMem mem(
     .rst(reset),
     .we(MemWE),
     .addr(ALUOut),
-    .data_i(DataOutReg2),
+    .data_i(in_ReadData2),
     .data_o(MemDataOut),
     .verify(verify)
 );
