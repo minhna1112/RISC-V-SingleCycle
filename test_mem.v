@@ -95,7 +95,7 @@ DataMem mem(
     .data_i(DataOutReg2),
     .data_o(MemDataOut),
     .verify(verify)
-)
+);
  // Generate the clock
  initial begin
      clk = 1'b0;

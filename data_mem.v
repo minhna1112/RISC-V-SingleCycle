@@ -12,7 +12,7 @@ module DataMem(
 );
 
 	reg[7:0]  data[0:32'h400];
-	initial $readmemh ( "SingleCycle/data_mem.txt", data );
+	initial $readmemh ( "./RISC-V-SingleCycle/data_mem.txt", data );
 
 	assign verify = {data[15], data[14], data[13], data[12]};
 
