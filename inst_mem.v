@@ -12,9 +12,9 @@ module inst_mem(
 
 always @ (*) begin
 	if (rst)
-		inst <= 32'b0;
+		inst = 32'b0;
 	else
-		inst <= inst_memory[addr[31:2]];
+		inst = inst_memory[addr[31:2]];
 end
 
 endmodule

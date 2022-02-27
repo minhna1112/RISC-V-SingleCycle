@@ -32,15 +32,18 @@ end
 //Store data in Little Edians order.
 always @ (*) begin
 	if (rst)
-		data_o <= 32'b0;
+		data_o = 32'b0;
+	
 	else if(we == 1'b0) begin
-		data_o <= {
+		data_o = {
 					data[addr + 3],
 					data[addr + 2],
 					data[addr + 1],
 					data[addr]   };
-	end else
-		data_o <= 32'b0;
+	end 
+	
+	else
+		data_o = 32'b0;
 end		
 
 endmodule

@@ -13,7 +13,7 @@ wire[1:0] WBSel;
 wire[31:0] Imm;
 wire[4:0]  ALUOp;
 wire[4:0] rs1, rs2, rd;
-wire BrEq;
+wire BrEq, BrLt;
 
 reg[31:0] in_WriteData;
 wire [31:0] in_ReadData1;
@@ -53,7 +53,8 @@ ID id(
     .rs1 (rs1),
     .rs2 (rs2),
     .rd (rd),
-    .BrEq (BrEq)
+    .BrEq (BrEq),
+    .BrLt (BrLt)
 );
 
 Registers reg_mem (
@@ -72,7 +73,8 @@ BranchComp brc(
     .rst (reset),
     .DataOutReg1(in_ReadData1),
     .DataOutReg2(in_ReadData2),
-    .BrEq (BrEq)
+    .BrEq (BrEq),
+    .BrLt (BrLt)
 );
 
 EX ex(
