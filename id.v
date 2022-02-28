@@ -1,7 +1,7 @@
 module ID (
     input wire rst,
     input wire[31:0] inst_i,
-    input wire BrEq, BrLt
+    input wire BrEq, BrLt,
     output reg PCSel, ALUSrc1, ALUSrc2, RegWE, MemWE,
     output reg[1:0] WBSel,
     output reg[31:0] Imm,

@@ -4,7 +4,7 @@ reg clk;
 reg reset;
 // Design Inputs and Outputs
 
-reg[31:0] in_addr;
+//reg[31:0] in_addr;
 wire[31:0] out_PC;
 wire[31:0] out_inst;
 
@@ -15,7 +15,7 @@ wire[4:0]  ALUOp;
 wire[4:0] rs1, rs2, rd;
 wire BrEq, BrLt;
 
-reg[31:0] in_WriteData;
+//reg[31:0] in_WriteData;
 wire [31:0] in_ReadData1;
 wire [31:0] in_ReadData2;
 
