@@ -7,14 +7,11 @@ module DataMem(
 	input	wire[31:0]	addr,
 	input	wire[31:0]	data_i,	// Data waiting for writing into data_mem
 	output	reg [31:0]	data_o,	// Data reading from data_mem
-	output 	wire[31:0]	verify	// test example.
 	
 );
 
 	reg[7:0]  data[0:32'h400];
 	initial $readmemh ( "./RISC-V-SingleCycle/data_mem.txt", data );
-
-	assign verify = {data[15], data[14], data[13], data[12]};
 
 //Store data in Little Edians order.
 always @ (posedge clk) begin
