@@ -53,7 +53,6 @@ always @ (*) begin
       5'b01100: ALUOut <= Oprend1 +  Oprend2;  		// addi
       5'b01101: ALUOut <= Oprend1 +  Oprend2;  		// add
       5'b01110: ALUOut <= Oprend1 -  Oprend2;  		// sub
-      5'b01000: ALUOut <= Oprend1 << Oprend2[4:0];	// sll
       5'b00110: ALUOut <= Oprend1 ^  Oprend2; 		  // xor
       5'b01001: ALUOut <= Oprend1 >> Oprend2[4:0]; // srl
       5'b00101: ALUOut <= Oprend1 |  Oprend2;  		// or

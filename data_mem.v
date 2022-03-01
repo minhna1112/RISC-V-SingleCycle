@@ -6,7 +6,7 @@ module DataMem(
 	input	wire		we,		// When it's high, write data_mem. Otherwise read data_mem.
 	input	wire[31:0]	addr,
 	input	wire[31:0]	data_i,	// Data waiting for writing into data_mem
-	output	reg [31:0]	data_o,	// Data reading from data_mem
+	output	reg [31:0]	data_o	// Data reading from data_mem
 	
 );
 

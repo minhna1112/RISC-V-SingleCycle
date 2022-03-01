@@ -96,7 +96,7 @@ DataMem mem(
     .we(MemWE),
     .addr(ALUOut),
     .data_i(in_ReadData2),
-    .data_o(MemDataOut),
+    .data_o(MemDataOut)
 );
 
 WB wb(
