@@ -21,20 +21,20 @@ module EX(
 
 always @ (*) begin
     if (rst)
-        Oprend1 <= 32'b0;
+        Oprend1 = 32'b0;
     else if (ALUSrc1)
-        Oprend1 <= PC;
+        Oprend1 = PC;
     else
-        Oprend1 <= DataOutReg1;
+        Oprend1 = DataOutReg1;
 end
 
 always @ (*) begin
     if (rst)
-        Oprend2 <= 32'b0;
+        Oprend2 = 32'b0;
     else if (ALUSrc2)
-        Oprend2 <= Imm;
+        Oprend2 = Imm;
     else
-        Oprend2 <= DataOutReg2;
+        Oprend2 = DataOutReg2;
 end
 
 /*

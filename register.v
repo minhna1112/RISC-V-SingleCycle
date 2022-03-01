@@ -13,7 +13,7 @@
 
     );
 
-    integer i;
+
     reg [31:0] regFile [0:31];
 
 /*
@@ -69,9 +69,9 @@ end
  */ 
 always @ (*) begin
     if (rst || ReadAddr1 == 5'h0)
-        ReadData1 <= 32'b0;
+        ReadData1 = 32'b0;
     else 
-        ReadData1 <= regFile[ReadAddr1];
+        ReadData1 = regFile[ReadAddr1];
 
 end
 
@@ -80,9 +80,9 @@ end
  */ 
 always @ (*) begin
     if (rst || ReadAddr2 == 5'h0)
-        ReadData2 <= 32'b0;
+        ReadData2 = 32'b0;
     else 
-        ReadData2 <= regFile[ReadAddr2];
+        ReadData2 = regFile[ReadAddr2];
 end
     
 endmodule
