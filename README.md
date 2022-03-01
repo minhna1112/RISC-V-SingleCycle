@@ -12,5 +12,5 @@ Project Digital Design II
 
 ## How to synthesize:
 1. Use Vivado
-2. Take riscv_test_soc.v as the top-level module for synthesis.
-3. Note: Leave out inst_mem.v, data_mem,v, riscv_test.v and other _.txt_ files 
+2. Take riscv.v as the top-level module for synthesis.
+3. Note: Leave out inst_mem.v, data_mem,v, riscv_test.v, rischv_test_soc.v and other _.txt_ files 
