@@ -47,7 +47,7 @@ always @ (*) begin
     case (ALUop_i)
       
       5'b10001: ALUOut <= Oprend1 +  Oprend2; 				// beq
-      
+      5'b10010: ALUOut <= Oprend1 +  Oprend2; 				// blt
       5'b10100: ALUOut <= Oprend1 +  Oprend2;      // lw and jalr
       5'b10101: ALUOut <= Oprend1 +  Oprend2;      // sw
       5'b01100: ALUOut <= Oprend1 +  Oprend2;  		// addi
